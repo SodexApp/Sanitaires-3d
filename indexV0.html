@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/three@0.115.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.115.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.115.0/examples/js/loaders/GLTFLoader.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/jsm/renderers/CSS2DRenderer.min.js"></script>
+ <!-- Add this to your HTML file -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+
+  </head> 
+ <body> 
+   
+<!--     mettre en place un panneu d'affichage Html pour les comments  -->
+
+ <div id="info-container"></div>
+  
+
+  <script>
+
+   
+ const scene = new THREE.Scene();
+    scene.background = null;//new THREE.Color(0, 0, 0, 0); 
+
+
+
+const renderer = new THREE.WebGLRenderer({ alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+    
+    
+// Create the camera and its target
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.set(-10, 5, 7);
+const target = new THREE.Vector3(0, 0, 0);
+    
+  
+    // import object Toilet
+
+const gltfLoader = new THREE.GLTFLoader();
+gltfLoader.load('https://cdn.glitch.global/9b657b83-cc2c-4197-a38a-10818ce55be0/toiletHotspot.glb?v=1663760953490', (gltf) => {
+  // Set up the materials in the model
+  gltf.scene.traverse((object) => {
+   object.traverse((child) => {
+    if (child.isMesh) {
+   //   console.log('material',child.material.name)
+      child.material.color.set("lightblue");
+    }
+  });
+ 
+   gltf.scene.children[0].scale.set(.18,.18,.18);
+     gltf.scene.children[0].position.set(7,0,0);
+    gltf.scene.children[0].rotateY(THREE.Math.degToRad(-150));
+  });
+//console.log( gltf.scene.children[0]);
+  // Add the model to the scene
+  scene.add(gltf.scene);
+  
+
+      
+  // create control
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.update();
+      
+//        // recuperation du controle  
+//        function animateOrbitControls() {
+//         controls.update();
+//         controls.target.set(0, 0, 0);
+//         //camera.position.z += 0.001;
+//         renderer.render(scene, camera);
+//         requestAnimationFrame(animateOrbitControls);
+         
+//       }
+
+  // Set up the lighting in the scene
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+  //ambientLight.position.set(0, 2, 0);
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(0, 2, 2);
+  
+  scene.add(directionalLight);
+
+
+  // Render the scene
+  renderer.render(scene, camera);
+});
+    
+ 
+   
+    function animate() {
+      
+   
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+      
+    } 
+     // add raycaster et touchstart ,click  
+    const raycaster = new THREE.Raycaster();
+    
+     if(isMobile())  {
+   
+   console.log("ismobile"+isMobile());
+   console.log(navigator.userAgent);
+window.addEventListener('touchstart', onTouchStart, false);
+//window.addEventListener('touchmove', onTouchMove, false);
+        // add raycaster et touchstart ,click  
+  
+ } else{
+    console.log("isLapTop");
+window.addEventListener('mousemove', onMouseMove, false); // Add a mousemove event listener to the window object
+window.addEventListener('click', onClick, false); // Add a click event listener to the window object
+ // add raycaster et touchstart ,click  
+
+
+ } 
+
+ 
+    
+function isMobile(){
+// Check the user agent string to see if it contains "Mobile"
+  return /Mobi/i.test(navigator.userAgent);  
+}
+  
+  
+    
+    const mouse = new THREE.Vector2();
+
+  function onMouseMove(event) {
+  
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+}
+    
+    function onTouchMove(event) {
+     // event.preventDefault();
+  
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+      
+
+
+ raycaster.setFromCamera(mouse, camera);
+}
+    // Attach click event to the renderer's DOM element
+renderer.domElement.addEventListener('click', onClick);
+    
+
+    
+    
+    function onClick(event) {
+    
+  const intersects = raycaster.intersectObjects(scene.children,true);
+    // Get the intersected mesh
+     
+    if (intersects.length > 0) {
+    const mesh = intersects[0].object;
+       const intersection = intersects[0].point;
+    
+
+console.log(mesh.name);
+console.log('mouse clicked',event.target);
+ var name = mesh.name
+              //     //calculate the position of the spriteNumero
+              //  const intersection = intersects[0].point;
+              // const offsetDistance = -.3; // adjust this as needed
+              // const offset = raycaster.ray.direction.clone().multiplyScalar(offsetDistance);
+              // console.log([intersection.x + offset.x, intersection.y + offset.y, intersection.z + offset.z]);  
+     
+var index = name.substr(name.length - 1);
+   // console.log(index);
+       if ((mesh.name.startsWith("plane"))){
+    
+     for (var j = 0; j < videoTextures.length; j++) {
+        if (j == index-1){
+    videoSprites[j].visible =true;
+    comments[j].visible = true;    
+    videos[j].play();
+    textSprites[j].visible = true;
+ 
+          
+          // ajuster la position de la camera
+          
+          const meshPosition = mesh.position.clone();
+         // const zoomFactor = 
+          const cameraOffsetX =-5
+          const cameraOffsetZ =+12
+          const cameraPosition = meshPosition.clone().add(new THREE.Vector3(cameraOffsetX, 0, cameraOffsetZ));
+  
+  // // Move the camera to the new position
+  // camera.position.copy(cameraPosition);
+           // Move the camera smoothly to the new position
+  gsap.to(camera.position, {
+    x: cameraPosition.x,
+    y: cameraPosition.y+1,
+    z: cameraPosition.z,
+    duration: 2, // You can adjust the duration to control the speed of the camera movement
+    ease: "power2.out" // You can choose a different easing function for a different effect
+  });
+  
+  // Update the camera's lookAt to center on the clicked sprite
+  controls.target.copy(intersection);
+  
+  // You may also want to adjust the camera's up vector to ensure it's correctly oriented
+  camera.up.set(0, 2, 0);
+
+  
+        
+     }else {
+       videoSprites[j].visible = false; // hide other video sprites
+       comments[j].visible = false; 
+        videos[j].pause(); // pause other videos
+        textSprites[j].visible = false;
+      
+      }
+  }
+  }
+     }
+  }  
+    
+
+    
+      function onTouchStart(event) {
+        
+         event.preventDefault();
+         const touch = event.touches[ 0 ];
+  const x = ( touch.clientX / window.innerWidth ) * 2 - 1;
+  const y = - ( touch.clientY / window.innerHeight ) * 2 + 1;
+        raycaster.setFromCamera( new THREE.Vector2( x, y ), camera );
+        
+  const intersects = raycaster.intersectObjects(scene.children,true);
+           
+  if (intersects.length > 0) {
+      
+  //  console.log('Clicked object:', intersects[0].object.material);
+    // Get the intersected mesh
+    const mesh = intersects[0].object;
+    
+  
+console.log(mesh.name);
+ var name = mesh.name
+              //     //calculate the position of the spriteNumero
+              //  const intersection = intersects[0].point;
+              // const offsetDistance = -.3; // adjust this as needed
+              // const offset = raycaster.ray.direction.clone().multiplyScalar(offsetDistance);
+              // console.log([intersection.x + offset.x, intersection.y + offset.y, intersection.z + offset.z]);  
+     
+var index = name.substr(name.length - 1);
+    console.log(index);
+    
+    if(mesh.name.startsWith("sprite")){
+    
+     for (var j = 0; j < videoSprites.length; j++) {
+        if (j == index-1){
+    videoSprites[j].visible =true;
+    videos[j].play();[j]
+    // planes[j].visible = true;
+    comments[j].visible = true
+    textSprites[j].visible = true;
+                   
+//           // ajuster la position de la camera
+          
+//           const meshPosition = mesh.position.clone();
+//           const cameraOffsetX = -5;
+//           const cameraOffsetZ =10;
+//           const cameraPosition = meshPosition.clone().add(new THREE.Vector3(cameraOffsetX, 0, cameraOffsetZ));
+  
+//   // // Move the camera to the new position
+//   // camera.position.copy(cameraPosition);
+//            // Move the camera smoothly to the new position
+//   gsap.to(camera.position, {
+//     x: cameraPosition.x,
+//     y: cameraPosition.y,
+//     z: cameraPosition.z,
+//     duration: 2, // You can adjust the duration to control the speed of the camera movement
+//     ease: "power2.out" // You can choose a different easing function for a different effect
+//   });
+  
+//   // Update the camera's lookAt to center on the clicked sprite
+//   camera.lookAt(meshPosition);
+  
+//   // You may also want to adjust the camera's up vector to ensure it's correctly oriented
+//   camera.up.set(0, 1, 0);
+     
+}  else {
+      videoSprites[j].visible = false; // hide other video sprites
+      videos[j].pause(); // pause other videos
+      comments[j].visible = false
+      }
+    }
+  }
+  }
+        
+}
+    
+   
+   animate();
+   
+  </script>
+   <script src = "buildScene.js"></script>
+<!--   <script src = "raycast.js"></script> -->
+</body>
+</html>
+
+    
