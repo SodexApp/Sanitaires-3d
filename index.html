@@ -206,6 +206,27 @@ if(mesh){
      const name = mesh.name;
       const index = parseInt(name.substr(name.length - 1)) ;
      console.log(name);
+   // interaction vocale
+
+const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique adaptée au nettoyage de cette zone.`;
+
+fetch("https://script.google.com/macros/s/AKfycbwr4YD0Nxjd1GC4nF6sWbG5lJLPdMhZqGuvowUgh-MhZLkse5e_THt52SUAWw5lY5kBKw/exec", {
+  method: "POST",
+  body: JSON.stringify({ prompt }),
+  headers: { "Content-Type": "application/json" }
+})
+.then(res => res.json())
+.then(data => {
+  const reply = data.choices[0].message.content; // Réponse GPT
+  console.log("GPT dit :", reply);
+  // Parole
+  const utterance = new SpeechSynthesisUtterance(reply);
+  utterance.lang = "fr-FR";
+  speechSynthesis.speak(utterance);
+});
+
+// affichage des differents items
+   
 for (let j = 0; j < names.length; j++) {
     
         if (j === index) {
