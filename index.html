@@ -208,22 +208,30 @@ if(mesh){
      console.log(name);
    // interaction vocale
 
-const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique adaptée au nettoyage de cette zone.`;
+const pointClique = "nettoyage sanitaire; // ← récupéré dynamiquement dans ta scène
 
-fetch("https://script.google.com/macros/s/AKfycbwr4YD0Nxjd1GC4nF6sWbG5lJLPdMhZqGuvowUgh-MhZLkse5e_THt52SUAWw5lY5kBKw/exec", {
+fetch("https://api.appsheet.com/api/v2/apps/7b87e4bb-eb8d-4845-8b70-67ebc2165e5c/tables/InteractionsGPT3D/Action", {
   method: "POST",
-  body: JSON.stringify({ prompt }),
-  headers: { "Content-Type": "application/json" }
+  headers: {
+    "ApplicationAccessKey": "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",
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    Action: "Add",
+    Properties: {
+      Locale: "fr-FR"
+    },
+    Rows: [{
+      ID: Date.now().toString(),
+      PointCliqué: pointClique
+    }]
+  })
 })
 .then(res => res.json())
 .then(data => {
-  const reply = data.choices[0].message.content; // Réponse GPT
-  console.log("GPT dit :", reply);
-  // Parole
-  const utterance = new SpeechSynthesisUtterance(reply);
-  utterance.lang = "fr-FR";
-  speechSynthesis.speak(utterance);
+  console.log("Envoyé à AppSheet ✅", data);
 });
+
 
 // affichage des differents items
    
