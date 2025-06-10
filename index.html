@@ -12,11 +12,9 @@
  <body> 
    
 <!--     mettre en place un panneu d'affichage Html pour les comments  -->
-
  <div id="info-container"></div>
-  
-
-  <script>
+    
+    <script>
 const scene = new THREE.Scene();
 scene.background = null;
 
@@ -42,7 +40,6 @@ gltfLoader.load('https://cdn.glitch.global/9b657b83-cc2c-4197-a38a-10818ce55be0/
  gltf.scene.children[0].scale.set(.18,.18,.18);
    gltf.scene.children[0].position.set(7,0,0);
   gltf.scene.children[0].rotateY(THREE.Math.degToRad(-180));
-  
 
   scene.add(gltf.scene.children[0]);
   
@@ -128,8 +125,7 @@ const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 // Event listeners
-    
-    
+        
     function isMobile() {
   return /Mobi/i.test(navigator.userAgent);
 }
@@ -147,11 +143,8 @@ const mouse = new THREE.Vector2();
   window.addEventListener('click', onClick, false);
 }
 
-
-
 function onMouseMove(event) {
   updateMousePosition(event);
- 
  
   raycaster.setFromCamera(mouse, camera);
 }
@@ -192,13 +185,11 @@ function handleIntersections() {
     const object = intersects[i].object;
     if (object && object.name && object.name.includes('sphere')) {
         mesh = object;
-     
-      
+          
         break; // Stop the loop once the first matching object is found
     }
 }
-    
-    
+        
 //     console.log('mouse clicked',mesh.name);
 
 //     if (mesh.name.startsWith("sphere")||intersects[1].object.name.startsWith("sphere")) {
