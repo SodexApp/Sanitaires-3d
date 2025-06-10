@@ -200,25 +200,21 @@ if(mesh){
 
 const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique sur le nettoyage de cette zone.`;
 
-// Appel à ton backend
-fetch('https://gpt-backend-vercel.vercel.app/api/chat', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ prompt })
-})
-.then(res => res.json())
-.then(data => {
-  const phrase = data.reply || data.text || "Je n’ai pas compris.";
-  const voix = new SpeechSynthesisUtterance(phrase);
-  voix.lang = "fr-FR";
-  speechSynthesis.speak(voix);
-});
+// // Appel à ton backend
+// fetch('https://gpt-backend-vercel.vercel.app/api/chat', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({ prompt })
+// })
+// .then(res => res.json())
+// .then(data => {
+//   const phrase = data.reply || data.text || "Je n’ai pas compris.";
+//   const voix = new SpeechSynthesisUtterance(phrase);
+//   voix.lang = "fr-FR";
+//   speechSynthesis.speak(voix);
+// });
 
-
-
-
-
-   
+  
 for (let j = 0; j < names.length; j++) {
     
         if (j === index) {
