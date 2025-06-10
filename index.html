@@ -196,23 +196,11 @@ function handleIntersections() {
 if(mesh){
      const name = mesh.name;
       const index = parseInt(name.substr(name.length - 1)) ;
-     console.log(name);
+     console.log("Sphère cliquée :",name);
 
-const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique sur le nettoyage de cette zone.`;
 
-// Appel à ton backend
-fetch('https://gpt-backend-vercel.vercel.app/api/chat', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ prompt })
-})
-.then(res => res.json())
-.then(data => {
-  const phrase = data.reply || data.text || "Je n’ai pas compris.";
-  const voix = new SpeechSynthesisUtterance(phrase);
-  voix.lang = "fr-FR";
-  speechSynthesis.speak(voix);
-});
+
+
 
   
 for (let j = 0; j < names.length; j++) {
@@ -232,6 +220,31 @@ for (let j = 0; j < names.length; j++) {
            sphereNumeros[j].material.opacity  = .7;
         }
       }
+
+     // APPEL GPT (ASYNCHRONE)
+    const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique sur le nettoyage de cette zone.`;
+
+    fetch('https://gpt-backend-vercel.vercel.app/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt })
+    })
+      .then(res => {
+        if (!res.ok) throw new Error("Réponse serveur invalide");
+        return res.json();
+      })
+      .then(data => {
+        const phrase = data.reply || data.text || "Je n’ai pas compris.";
+        const voix = new SpeechSynthesisUtterance(phrase);
+        voix.lang = "fr-FR";
+        speechSynthesis.speak(voix);
+      })
+      .catch(err => {
+        console.error("Erreur lors de l'appel à GPT :", err);
+        const voix = new SpeechSynthesisUtterance("Une erreur est survenue.");
+        voix.lang = "fr-FR";
+        speechSynthesis.speak(voix);
+      });
     }else{
       console.log("No  sphere' object found intersectsObject.");
     }
