@@ -206,35 +206,6 @@ if(mesh){
      const name = mesh.name;
       const index = parseInt(name.substr(name.length - 1)) ;
      console.log(name);
-   // interaction vocale
-
-// const pointClique = "nettoyage sanitaire; // ← récupéré dynamiquement dans ta scène
-
-// fetch("https://api.appsheet.com/api/v2/apps/7b87e4bb-eb8d-4845-8b70-67ebc2165e5c/tables/InteractionsGPT3D/Action", {
-//   method: "POST",
-//   headers: {
-//     "ApplicationAccessKey": ${{ secrets.API_KEY }},
-//     "Content-Type": "application/json"
-//   },
-//   body: JSON.stringify({
-//     Action: "Add",
-//     Properties: {
-//       Locale: "fr-FR"
-//     },
-//     Rows: [{
-//       ID: Date.now().toString(),
-//       PointCliqué: pointClique
-//     }]
-//   })
-// })
-// .then(res => res.json())
-// .then(data => {
-//   console.log("Envoyé à AppSheet ✅", data);
-// });
-
-
-// affichage des differents items
-   
 for (let j = 0; j < names.length; j++) {
     
         if (j === index) {
