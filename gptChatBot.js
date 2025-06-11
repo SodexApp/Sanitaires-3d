@@ -74,7 +74,7 @@ function afficherDansBulle(texte) {
 function enregistrerInteraction(question, reponse) {
   fetch("https://script.google.com/macros/s/AKfycbz-6CZyLfbH9L0um7CaIIzUqStGCs9HQkVA7aRg6PcGH5Kh1jLk49EfULicX5OKj4Y/exec", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify({
       stagiaire: stagiaire,
       zone: zone,
@@ -82,7 +82,10 @@ function enregistrerInteraction(question, reponse) {
       question: question,
       reponse: reponse
     })
-  }).catch(e => console.error("Erreur AppSheet log :", e));
+  })
+      .then(r => r.text())
+      .then(txt => console.log("✅ Apps Script :", txt))
+      .catch(e => console.error("Erreur AppSheet log :", e));
 }
 
 
