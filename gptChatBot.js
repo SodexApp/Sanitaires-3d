@@ -1,4 +1,6 @@
      // APPEL GPT (ASYNCHRONE)
+
+function callBot(index){
     const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique sur le nettoyage de cette zone.`;
 
 fetch('https://gpt-backend-vercel.vercel.app/api/chat', {
@@ -31,3 +33,4 @@ fetch('https://gpt-backend-vercel.vercel.app/api/chat', {
    isToggleFunctionRunning = true;
   }
 
+}
