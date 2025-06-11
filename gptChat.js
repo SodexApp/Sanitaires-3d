@@ -58,7 +58,7 @@ function attendreRéponseVocale() {
     sendToGPT(); // boucle continue
   };
 
-  reco.onerror = (e) => console.error("❌ Erreur reco vocale :", e);
+  reco.onerror = (e) => console.error("❌ Erreur reco vocale :", e.error);
   reco.start();
 }
 
