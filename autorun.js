@@ -35,79 +35,7 @@ function displayVideo(numero){
 }
      
 
-// autorun1 //////////////////////////////////////////////////
-// function autorun(){
-//   console.log("autorun")  
-//   // var viewer = document.querySelector('model-viewer');
-//   const viewer = document.querySelector("#sanitairesModop"); 
-//   console.log(viewer.id)
-//   var positions = [];
-//   var orbits = [];
-//   var topics = [];
-//   const hotspots =   viewer.querySelectorAll("button.Hotspot");;
-//   hotspots.forEach((hotspot) => {  
-//     let dataset = hotspot.dataset;
-//     positions.push(dataset.position);
-//     orbits.push(dataset.orbit);
-//   });
-    
-//      for (let i = 0; i < positions.length; i++) {
-//    setTimeout(function() {
-//       // viewer.goto(positions[i][0],positions[i][1], positions[i][2]);
-      
-//     viewer.cameraTarget = positions[i];
-//    viewer.cameraOrbit = orbits[i];
-//     viewer.fieldOfView = "30deg";
-     
-//       document.getElementById("details"+i+1).style.display = "block";
-//      // viewer.autoRotate = true;
-//     }, i * 4500);
-//   }; 
-  
-    
-// }
-// autorun2/////////////////////////////////////////////////////
-// let flag = true;
-// let i = 0;
-// function autorun(){
-//   console.log("autorun")
-//   const viewer = document.querySelector("#sanitairesModop");
-//   console.log(viewer.id)
-//   var positions = [];
-//   var orbits = [];
-//   const hotspots = viewer.querySelectorAll("button.Hotspot");;
-//   hotspots.forEach((hotspot) => {
-//     let dataset = hotspot.dataset;
-//     positions.push(dataset.position);
-//     orbits.push(dataset.orbit)
-//   });
-//   function run(){
-//     if(flag){
-//       if(i < positions.length){
-        
-//         console.log("details" + (i+1))
-//         viewer.cameraTarget = positions[i];
-//         viewer.cameraOrbit = orbits[i];
-//         viewer.fieldOfView = "30deg";
-//         let el = document.getElementById('details' + (i+1));
-//         if(el) el.style.display = "block";
-//         i++;
-//         setTimeout(run, 4500);
-//       }
-//     }
-//   }
-//   run();
-// }
 
-// function stop(){
-//   flag = false;
-// }
-
-// function resume(){
-//   flag = true;
-//   run();
-// }
-              
               
 
     
