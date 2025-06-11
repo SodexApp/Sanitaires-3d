@@ -193,9 +193,10 @@ function handleIntersections() {
 
 //     if (mesh.name.startsWith("sphere")||intersects[1].object.name.startsWith("sphere")) {
 if(mesh){
-     const name = mesh.name;
-      const index = parseInt(name.substr(name.length - 1)) ;
+   const name = mesh.name;
+   const index = parseInt(name.substr(name.length - 1)) ;
      console.log("Sphère cliquée :",name);
+   const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique sur cette zone de nettoyage.`;
 // traitement visuel d'abord  
 for (let j = 0; j < names.length; j++) {
     
@@ -217,7 +218,7 @@ for (let j = 0; j < names.length; j++) {
 }
 
 
- lancerDialogue(initialPrompt);
+ lancerDialogue(prompt);
 //callBot(index);
 
    else{
