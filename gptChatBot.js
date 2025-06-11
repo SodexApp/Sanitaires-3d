@@ -26,7 +26,7 @@ function sendToGPT() {
       speechSynthesis.speak(new SpeechSynthesisUtterance(reponse));
 
       // Enregistrement dans AppSheet via Apps Script
-      const derniereUser = conversation.slice(-2)[0].content;
+      const derniereUser = conversation.slice(-3)[0].content;
       enregistrerInteraction(derniereUser, reponse);
 
       // Écouter la réponse orale de l'utilisateur
@@ -43,6 +43,7 @@ function attendreRéponseVocale() {
   reco.interimResults = false;
   reco.onresult = event => {
     const reponseUtilisateur = event.results[0][0].transcript;
+    console.log("🎤 Réponse utilisateur :", reponseUtilisateur);
     conversation.push({ role: "user", content: reponseUtilisateur });
     sendToGPT();
   };
