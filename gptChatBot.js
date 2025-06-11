@@ -76,7 +76,7 @@ function afficherDansBulle(texte) {
 
 // Envoi vers Google Apps Script (lié à AppSheet)
 function enregistrerInteraction(question, reponse) {
-  fetch("https://script.google.com/macros/s/TON_SCRIPT_ID/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbxMKpgja2EZBa2jCofXNRNgaTdYs_C2MSAA7PO_yowRwzgLCL1sl_Bq4JtjcPvtSTK1/exec", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
