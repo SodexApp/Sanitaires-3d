@@ -190,7 +190,6 @@ function handleIntersections() {
     }
 }
              console.log('mouse clicked',mesh.name);
-
 //     if (mesh.name.startsWith("sphere")||intersects[1].object.name.startsWith("sphere")) {
 if(mesh){
    const name = mesh.name;
@@ -215,14 +214,11 @@ for (let j = 0; j < names.length; j++) {
            sphereNumeros[j].material.opacity  = .7;
         }
       }
-
-
-
  lancerDialogue(prompt);
 //callBot(index);
 
 } else{
-      console.log("No  sphere' object found intersectsObject.");
+      console.log("No  sphere object found intersectsObject.");
     }
    isToggleFunctionRunning = true;
   }
