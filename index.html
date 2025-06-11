@@ -179,13 +179,12 @@ function handleIntersections() {
   const intersects = raycaster.intersectObjects(scene.children, true);
 
   //if (intersects.length > 0) {
-  let mesh ;
+  let mesh = null ;
   
   for (let i = 0; i < intersects.length; i++) {
     const object = intersects[i].object;
     if (object && object.name && object.name.includes('sphere')) {
-        mesh = object;
-          
+        mesh = object;     
         break; // Stop the loop once the first matching object is found
     }
 }
