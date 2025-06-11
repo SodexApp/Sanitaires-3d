@@ -1,13 +1,15 @@
 
-let conversation = [
+
+
+// Lancement manuel ou automatique après clic
+function lancerDialogue(initialPrompt) {
+
+  let conversation = [
   { role: "system", content: "Tu es un formateur en nettoyage professionnel." }
 ];
 
 const stagiaire = "Nom Prenom"; // à adapter dynamiquement si besoin
 const zone = "sanitaires";      // à adapter selon le point cliqué
-
-// Lancement manuel ou automatique après clic
-function lancerDialogue(initialPrompt) {
   conversation.push({ role: "user", content: initialPrompt });
   sendToGPT();
 }
