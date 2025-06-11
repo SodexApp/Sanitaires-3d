@@ -180,15 +180,21 @@ function handleIntersections() {
 
   //if (intersects.length > 0) {
   let mesh = null ;
-  
-  for (let i = 0; i < intersects.length; i++) {
-    const object = intersects[i].object;
-    if (object && object.name && object.name.includes('sphere')) {
-        mesh = object;     
-        break; // Stop the loop once the first matching object is found
+     for (const hit of intersects) {
+    if (hit.object?.name?.includes('sphere')) {
+      mesh = hit.object;
+      break;
     }
-}
-             console.log('mouse clicked',mesh.name);
+  }
+  
+//   for (let i = 0; i < intersects.length; i++) {
+//     const object = intersects[i].object;
+//     if (object && object.name && object.name.includes('sphere')) {
+//         mesh = object;     
+//         break; // Stop the loop once the first matching object is found
+//     }
+// }
+ //            console.log('mouse clicked',mesh.name);
 //     if (mesh.name.startsWith("sphere")||intersects[1].object.name.startsWith("sphere")) {
 if(mesh){
    const name = mesh.name;
