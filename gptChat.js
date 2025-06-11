@@ -66,7 +66,7 @@ function attendreRéponseVocale() {
 // 🧾 Log vers Google Apps Script
 // ------------------------------
 function enregistrerInteraction(question, reponse) {
-  fetch("https://script.google.com/macros/s/AKfycb.../exec", {
+  fetch("https://script.google.com/macros/s/AKfycbz-6CZyLfbH9L0um7CaIIzUqStGCs9HQkVA7aRg6PcGH5Kh1jLk49EfULicX5OKj4Y/exec", {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" }, // évite pré-vol CORS
     body: JSON.stringify({
