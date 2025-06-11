@@ -27,10 +27,4 @@ fetch('https://gpt-backend-vercel.vercel.app/api/chat', {
   voix.lang = "fr-FR";
   speechSynthesis.speak(voix);
 });
-    }else{
-      console.log("No  sphere' object found intersectsObject.");
-    }
-   isToggleFunctionRunning = true;
-  }
-
 }
