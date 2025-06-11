@@ -215,7 +215,16 @@ for (let j = 0; j < names.length; j++) {
            sphereNumeros[j].material.opacity  = .7;
         }
       }
-callBot(index);
+
+   let conversation = [
+  { role: "system", content: "Tu es un formateur en nettoyage professionnel." }
+];
+
+const stagiaire = "Nom Prenom"; // à adapter dynamiquement si besoin
+const zone = "sanitaires";      // à adapter selon le point cliqué
+
+   lancerDialogue(initialPrompt);
+//callBot(index);
      // APPEL GPT (ASYNCHRONE)
 //     const prompt = `Le stagiaire a cliqué sur le point ${index}. Pose-lui une question pédagogique sur le nettoyage de cette zone.`;
 
