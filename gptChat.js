@@ -39,9 +39,12 @@ function lancerExerciceDialogue() {
   speechSynthesis.speak(synth);
 }
 
-function traduireProblemeEnFrancais(input, callback) {
+function reformulerProblemeEnFrancais(input, callback) {
   const messages = [
-    { role: "system", content: "Tu es un traducteur. Traduis ce que dit le stagiaire en français, sans commenter." },
+    {
+      role: "system",
+      content: "Tu es un formateur professionnel. Quand tu reçois une phrase, reformule-la en français clair, correct et professionnel, comme si elle devait être notée dans un rapport. Réponds uniquement par la phrase reformulée, sans explication."
+    },
     { role: "user", content: input }
   ];
 
@@ -52,14 +55,15 @@ function traduireProblemeEnFrancais(input, callback) {
   })
     .then(res => res.json())
     .then(data => {
-      const traduction = data.reply || input;
-      callback(traduction); // on poursuit ici
+      const reformulation = data.reply || input;
+      callback(reformulation);
     })
     .catch(err => {
-      console.error("❌ Erreur de traduction :", err);
-      callback(input); // fallback
+      console.error("❌ Erreur reformulation :", err);
+      callback(input);
     });
 }
+
 
 
 // -----------------------------
@@ -74,11 +78,11 @@ function attendreRéponseVocale() {
     const reponse = event.results[0][0].transcript;
     console.log("🎤 Réponse utilisateur :", reponse);
 
-  // Traduire avant de lancer GPT
-  traduireProblemeEnFrancais(reponse, (problemeTraduit) => {
-    conversation.push({ role: "user", content: problemeTraduit });
-    envoyerAChatGPT(problemeTraduit); // ← on continue avec le texte français
-  });
+  // reformuler en français avant de lancer GPT
+reformulerProblemeEnFrancais(reponseUtilisateur, (problemeFormate) => {
+  conversation.push({ role: "user", content: problemeFormate });
+  envoyerAChatGPT(problemeFormate);
+});
 };
 
   reco.onerror = e => {
