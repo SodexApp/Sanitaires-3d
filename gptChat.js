@@ -12,8 +12,16 @@ let conversation = [
   }
 ];
 
-let stagiaire = "Nom Prénom"; // 🧠 À adapter dynamiquement
-let zone = "zone non précisée"; // 🧠 À définir depuis l’endroit cliqué
+// 🔧 Utilitaire pour lire les paramètres URL
+function getParam(name) {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+}
+
+// 📥 Récupération dynamique des données AppSheet
+let stagiaire = getParam("userName") || "Stagiaire inconnu";
+let session = getParam("sessionId") || "Session inconnue";
+let langue = getParam("langue") || "fr";
 
 let lastBotMessage = ""; // 🔁 Mémorise le dernier message assistant
 
