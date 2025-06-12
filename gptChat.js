@@ -75,7 +75,7 @@ function attendreRéponseVocale() {
     console.log("🎤 Réponse utilisateur :", reponse);
 
   // Traduire avant de lancer GPT
-  traduireProblemeEnFrancais(reponseUtilisateur, (problemeTraduit) => {
+  traduireProblemeEnFrancais(reponse, (problemeTraduit) => {
     conversation.push({ role: "user", content: problemeTraduit });
     envoyerAChatGPT(problemeTraduit); // ← on continue avec le texte français
   });
