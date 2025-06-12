@@ -39,6 +39,29 @@ function lancerExerciceDialogue() {
   speechSynthesis.speak(synth);
 }
 
+function traduireProblemeEnFrancais(input, callback) {
+  const messages = [
+    { role: "system", content: "Tu es un traducteur. Traduis ce que dit le stagiaire en français, sans commenter." },
+    { role: "user", content: input }
+  ];
+
+  fetch("https://gpt-backend-vercel.vercel.app/api/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages })
+  })
+    .then(res => res.json())
+    .then(data => {
+      const traduction = data.reply || input;
+      callback(traduction); // on poursuit ici
+    })
+    .catch(err => {
+      console.error("❌ Erreur de traduction :", err);
+      callback(input); // fallback
+    });
+}
+
+
 // -----------------------------
 // 🎤 Attente de la réponse orale
 // -----------------------------
@@ -51,9 +74,12 @@ function attendreRéponseVocale() {
     const reponse = event.results[0][0].transcript;
     console.log("🎤 Réponse utilisateur :", reponse);
 
-    conversation.push({ role: "user", content: reponse });
-    envoyerAChatGPT(reponse); // Enchaîne avec la réponse GPT
-  };
+  // Traduire avant de lancer GPT
+  traduireProblemeEnFrancais(reponseUtilisateur, (problemeTraduit) => {
+    conversation.push({ role: "user", content: problemeTraduit });
+    envoyerAChatGPT(problemeTraduit); // ← on continue avec le texte français
+  });
+};
 
   reco.onerror = e => {
     alert("Erreur reconnaissance vocale : " + e.error);
@@ -83,7 +109,7 @@ function envoyerAChatGPT(texteUtilisateur) {
       enregistrerInteraction(texteUtilisateur, reponse); // LOG GSheet
 
       const synth = new SpeechSynthesisUtterance(reponse);
-      synth.lang = "fr-FR";
+      synth.lang = langue;// ← vocal dans la langue choisie
       synth.onend = () => {
         // Optionnel : afficher un bouton "Autre difficulté"
         console.log("🟢 Fin réponse GPT");
