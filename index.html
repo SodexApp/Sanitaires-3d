@@ -51,19 +51,19 @@ miroir.name = "miroir";
 miroir.material.color.set("white");
 //miroir.material.metalness = 0.3;
   
-//  Create a material with a webcam texture
-const videoWebcam = document.createElement('video');
-videoWebcam.autoplay = true;
-navigator.mediaDevices
-  .getUserMedia({ video: true })
-  .then(function (stream) {
-    videoWebcam.srcObject = stream;
-  })
-  .catch(function (error) {
-    console.error('Error accessing the webcam:', error);
-  });
- const textureWebcam = new THREE.VideoTexture(videoWebcam);
-miroir.material.map = textureWebcam;
+// //  Create a material with a webcam texture
+// const videoWebcam = document.createElement('video');
+// videoWebcam.autoplay = true;
+// navigator.mediaDevices
+//   .getUserMedia({ video: true })
+//   .then(function (stream) {
+//     videoWebcam.srcObject = stream;
+//   })
+//   .catch(function (error) {
+//     console.error('Error accessing the webcam:', error);
+//   });
+//  const textureWebcam = new THREE.VideoTexture(videoWebcam);
+// miroir.material.map = textureWebcam;
   
   
 const sanitaire = scene.getObjectByName("mesh_4");
