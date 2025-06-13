@@ -26,10 +26,10 @@ const { sessionId, userName, langue } = getURLParams();
 console.log("🔍 Paramètres URL :", sessionId, userName, langue);
 
 
-// // 📥 Récupération dynamique des données AppSheet
-// let stagiaire = getParam("userName") || "Stagiaire inconnu";
-// let session = getParam("sessionId") || "Session inconnue";
-// let langue = getParam("langue") || "fr";
+// 📥 Récupération dynamique des données AppSheet
+let stagiaire = getParam("userName") || "Stagiaire inconnu";
+let session = getParam("sessionId") || "Session inconnue";
+let langue = getParam("langue") || "fr";
 
 let lastBotMessage = ""; // 🔁 Mémorise le dernier message assistant
 
@@ -141,8 +141,8 @@ function enregistrerInteraction(probleme, conseil) {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
     body: JSON.stringify({
-      stagiaire,
-      zone,
+      session,
+      langue,
       date: new Date().toISOString(),
       probleme,
       conseil
