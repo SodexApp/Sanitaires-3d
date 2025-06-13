@@ -75,8 +75,8 @@ function attendreRéponseVocale() {
   reco.interimResults = false;
 
   reco.onresult = event => {
-    const reponse = event.results[0][0].transcript;
-    console.log("🎤 Réponse utilisateur :", reponse);
+    const reponseUtilisateur = event.results[0][0].transcript;
+    console.log("🎤 Réponse utilisateur :", reponseUtilisateur);
 
   // reformuler en français avant de lancer GPT
 reformulerProblemeEnFrancais(reponseUtilisateur, (problemeFormate) => {
