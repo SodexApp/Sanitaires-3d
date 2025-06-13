@@ -13,15 +13,23 @@ let conversation = [
 ];
 
 // 🔧 Utilitaire pour lire les paramètres URL
-function getParam(name) {
-  const url = new URL(window.location.href);
-  return url.searchParams.get(name);
+function getURLParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    sessionId: params.get("sessionId"),
+    userName: params.get("userName"),
+    langue: params.get("langue")
+  };
 }
 
-// 📥 Récupération dynamique des données AppSheet
-let stagiaire = getParam("userName") || "Stagiaire inconnu";
-let session = getParam("sessionId") || "Session inconnue";
-let langue = getParam("langue") || "fr";
+const { sessionId, userName, langue } = getURLParams();
+console.log("🔍 Paramètres URL :", sessionId, userName, langue);
+
+
+// // 📥 Récupération dynamique des données AppSheet
+// let stagiaire = getParam("userName") || "Stagiaire inconnu";
+// let session = getParam("sessionId") || "Session inconnue";
+// let langue = getParam("langue") || "fr";
 
 let lastBotMessage = ""; // 🔁 Mémorise le dernier message assistant
 
