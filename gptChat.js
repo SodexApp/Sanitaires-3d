@@ -40,11 +40,11 @@ function lancerExerciceDialogue(phrase) {
 
     const message = `Tu as cliqué sur le ${phrase} . Quelle est ta question ?`;
   afficherDansBulle(phrase);
-  lastBotMessage = phrase;
+  lastBotMessage = message;
 
   const synth = new SpeechSynthesisUtterance(message);
   synth.lang = "fr-FR";
-  synth.onend = () => attendreRéponseVocale(message); // Attente après la voix
+  synth.onend = () => attendreRéponseVocale(phrase); // Attente après la voix
   speechSynthesis.speak(synth);
 }
 
@@ -123,10 +123,10 @@ function envoyerAChatGPT(texteUtilisateur) {
       afficherDansBulle(reponse);
       lastBotMessage = reponse;
 
-      enregistrerInteraction(texteUtilisateur, reponse); // LOG GSheet
+      enregistrerInteraction(texteUtilisateur, reponse,lastBotMessage); // LOG GSheet
       // Remove markdown asterisks, underscores, etc.
-      const textNettoye = reponse.replace(/[*_`#~]/g, "");
-      const synth = new SpeechSynthesisUtterance(textNettoye);
+      const texteNettoye = reponse.replace(/[*_`#~]/g, "");
+      const synth = new SpeechSynthesisUtterance(texteNettoye);
       synth.lang = langue;// ← vocal dans la langue choisie
       synth.onend = () => {
         // Optionnel : afficher un bouton "Autre difficulté"
@@ -142,7 +142,7 @@ function envoyerAChatGPT(texteUtilisateur) {
 // -----------------------------
 // 🗂️ Enregistrement dans GSheet
 // -----------------------------
-function enregistrerInteraction(probleme, conseil) {
+function enregistrerInteraction(probleme, conseil,etape) {
   fetch("https://script.google.com/macros/s/AKfycbz-6CZyLfbH9L0um7CaIIzUqStGCs9HQkVA7aRg6PcGH5Kh1jLk49EfULicX5OKj4Y/exec", {
     method: "POST",
     headers: { "Content-Type": "text/plain;charset=utf-8" },
@@ -150,6 +150,7 @@ function enregistrerInteraction(probleme, conseil) {
       sessionId,
       langue,
       date: new Date().toISOString(),
+      etape
       probleme,
       conseil
     })
