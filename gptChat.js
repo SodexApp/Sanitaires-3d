@@ -35,12 +35,12 @@ let lastBotMessage = ""; // 🔁 Mémorise le dernier message assistant
 // -----------------------------
 // 🚀 Lancement de l'exercice
 // -----------------------------
-function lancerExerciceDialogue(etape) {
+function lancerExerciceDialogue(phrase) {
   // const phrase = conversation[1].content;
 
-    const message = `Tu as cliqué sur le ${etape} . Quelle est ta question ?`;
-  afficherDansBulle(etape);
-  lastBotMessage = etape;
+    const message = `Tu as cliqué sur le ${phrase} . Quelle est ta question ?`;
+  afficherDansBulle(phrase);
+  lastBotMessage = phrase;
 
   const synth = new SpeechSynthesisUtterance(phrase);
   synth.lang = "fr-FR";
