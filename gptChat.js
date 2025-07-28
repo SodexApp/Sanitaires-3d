@@ -1,4 +1,4 @@
-l'étape// -----------------------------
+
 // 💬 Conversation initiale
 // -----------------------------
 let conversation = [
