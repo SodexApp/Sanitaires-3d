@@ -124,7 +124,7 @@ function envoyerAChatGPT(texteUtilisateur) {
 
       enregistrerInteraction(texteUtilisateur, reponse); // LOG GSheet
       // Remove markdown asterisks, underscores, etc.
-      const texteNettoye = reponse.replace(/[*_`#~]/g, "");
+      const textNettoye = reponse.replace(/[*_`#~]/g, "");
       const synth = new SpeechSynthesisUtterance(textNettoye);
       synth.lang = langue;// ← vocal dans la langue choisie
       synth.onend = () => {
