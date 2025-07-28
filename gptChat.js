@@ -1,4 +1,4 @@
-
+ge
 // 💬 Conversation initiale
 // -----------------------------
 let conversation = [
@@ -42,9 +42,9 @@ function lancerExerciceDialogue(phrase) {
   afficherDansBulle(phrase);
   lastBotMessage = phrase;
 
-  const synth = new SpeechSynthesisUtterance(phrase);
+  const synth = new SpeechSynthesisUtterance(message);
   synth.lang = "fr-FR";
-  synth.onend = () => attendreRéponseVocale(phrase); // Attente après la voix
+  synth.onend = () => attendreRéponseVocale(message); // Attente après la voix
   speechSynthesis.speak(synth);
 }
 
