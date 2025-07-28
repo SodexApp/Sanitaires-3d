@@ -118,8 +118,8 @@ function envoyerAChatGPT(texteUtilisateur) {
       lastBotMessage = reponse;
 
       enregistrerInteraction(texteUtilisateur, reponse); // LOG GSheet
-
-      const synth = new SpeechSynthesisUtterance(reponse);
+      const texteNettoye = reponse.replace(/[*_`#~]/g, "");
+      const synth = new SpeechSynthesisUtterance(textNettoye);
       synth.lang = langue;// ← vocal dans la langue choisie
       synth.onend = () => {
         // Optionnel : afficher un bouton "Autre difficulté"
