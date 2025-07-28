@@ -35,8 +35,10 @@ let lastBotMessage = ""; // 🔁 Mémorise le dernier message assistant
 // -----------------------------
 // 🚀 Lancement de l'exercice
 // -----------------------------
-function lancerExerciceDialogue() {
-  const phrase = conversation[1].content;
+function lancerExerciceDialogue(etape) {
+  // const phrase = conversation[1].content;
+
+    const message = `Tu as cliqué sur le ${etape} . Quelle est ta question ?`;
   afficherDansBulle(phrase);
   lastBotMessage = phrase;
 
@@ -76,7 +78,7 @@ function reformulerProblemeEnFrancais(input, callback) {
 // -----------------------------
 // 🎤 Attente de la réponse orale
 // -----------------------------
-function attendreRéponseVocale() {
+function attendreRéponseVocale(etape) {
   const reco = new webkitSpeechRecognition();
   reco.lang = "fr-FR";
   reco.interimResults = false;
@@ -85,6 +87,9 @@ function attendreRéponseVocale() {
     const reponseUtilisateur = event.results[0][0].transcript;
     console.log("🎤 Réponse utilisateur :", reponseUtilisateur);
 
+    const contexte =  `L'utilisateur parle d'un ${nom} dans une scène de nettoyage.`;
+    const reformulerAvecContexte = `${contexte} Voici ce qu’il dit : "${reponseUtilisateur}"`;
+    
   // reformuler en français avant de lancer GPT
 reformulerProblemeEnFrancais(reponseUtilisateur, (problemeFormate) => {
   conversation.push({ role: "user", content: problemeFormate });
