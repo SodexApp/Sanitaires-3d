@@ -44,7 +44,7 @@ function lancerExerciceDialogue(phrase) {
 
   const synth = new SpeechSynthesisUtterance(phrase);
   synth.lang = "fr-FR";
-  synth.onend = () => attendreRéponseVocale(); // Attente après la voix
+  synth.onend = () => attendreRéponseVocale(phrase); // Attente après la voix
   speechSynthesis.speak(synth);
 }
 
