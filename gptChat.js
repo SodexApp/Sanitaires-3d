@@ -1,4 +1,4 @@
-// -----------------------------
+l'étape// -----------------------------
 // 💬 Conversation initiale
 // -----------------------------
 let conversation = [
@@ -87,7 +87,7 @@ function attendreRéponseVocale(etape) {
     const reponseUtilisateur = event.results[0][0].transcript;
     console.log("🎤 Réponse utilisateur :", reponseUtilisateur);
 
-    const contexte =  `L'utilisateur parle d'un ${nom} dans une scène de nettoyage.`;
+    const contexte =  `L'utilisateur parle de l'étape ${etape} dans une scène de nettoyage.`;
     const reformulerAvecContexte = `${contexte} Voici ce qu’il dit : "${reponseUtilisateur}"`;
     
   // reformuler en français avant de lancer GPT
