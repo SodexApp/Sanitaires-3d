@@ -198,8 +198,8 @@ for (let j = 0; j < names.length; j++) {
         if (j === index) {
           sphereNumeros[j].material.opacity  = .1;
           videoSprites[j].visible = true;
-          comments[j].visible = true;
-          videos[j].play();
+          //comments[j].visible = true;
+          //videos[j].play();
           titleSprites[j].visible = true;
           updateCameraPositionAndTarget(mesh.position);
         } else {
@@ -212,7 +212,7 @@ for (let j = 0; j < names.length; j++) {
       }
 
 
- lancerExerciceDialogue();
+ lancerExerciceDialogue(titleSprites[j]);
 
 
 } else{
