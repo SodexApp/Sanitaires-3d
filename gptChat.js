@@ -150,7 +150,7 @@ function enregistrerInteraction(probleme, conseil,etape) {
       sessionId,
       langue,
       date: new Date().toISOString(),
-      etape
+      etape,
       probleme,
       conseil
     })
