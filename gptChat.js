@@ -91,9 +91,10 @@ function attendreRéponseVocale(etape) {
     const reformulerAvecContexte = `${contexte} Voici ce qu’il dit : "${reponseUtilisateur}"`;
     
   // reformuler en français avant de lancer GPT
-reformulerProblemeEnFrancais(reponseUtilisateur, (problemeFormate) => {
+reformulerProblemeEnFrancais(reformulerAvecContexte, (problemeFormate) => {
   conversation.push({ role: "user", content: problemeFormate });
   envoyerAChatGPT(problemeFormate);
+});
 });
 };
 
