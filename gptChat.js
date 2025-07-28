@@ -95,7 +95,7 @@ reformulerProblemeEnFrancais(reformulerAvecContexte, (problemeFormate) => {
   conversation.push({ role: "user", content: problemeFormate });
   envoyerAChatGPT(problemeFormate);
 });
-});
+
 };
 
   reco.onerror = e => {
