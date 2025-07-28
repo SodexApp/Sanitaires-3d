@@ -39,8 +39,8 @@ function lancerExerciceDialogue(etape) {
   // const phrase = conversation[1].content;
 
     const message = `Tu as cliqué sur le ${etape} . Quelle est ta question ?`;
-  afficherDansBulle(phrase);
-  lastBotMessage = phrase;
+  afficherDansBulle(etape);
+  lastBotMessage = etape;
 
   const synth = new SpeechSynthesisUtterance(phrase);
   synth.lang = "fr-FR";
